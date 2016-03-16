@@ -38,6 +38,7 @@ public class AddCoursework extends AppCompatActivity{
 
 
         //Add data to file
+        //TODO rewrite this as a callable function, so that initially file can be wiped, then MODE_APPEND used to add to it
         String datatostore = CWName_Text + "," + DueDate_Text + "," + Weighting_Text;
         BufferedWriter bufferWriter = null;
         try {
