@@ -7,14 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class AddCoursework extends AppCompatActivity {
+/**
+ * Created by Sam on 16/03/2016.
+ */
+public class AddCoursework extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,10 @@ public class AddCoursework extends AppCompatActivity {
             }
         }
 
-        setContentView(R.layout.activity_home);
-       Snackbar.make(view, "Coursework Added", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+
+        finish(); //exit activity
+
     }
 }
+
+
