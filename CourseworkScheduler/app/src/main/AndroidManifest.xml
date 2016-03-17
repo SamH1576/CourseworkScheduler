@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddCoursework" />
-        <activity android:name=".ViewCWListActivity"></activity>
+        <activity android:name=".ViewCWListActivity" />
+        <activity android:name=".EditCWChooseActivity"></activity>
     </application>
 
 </manifest>

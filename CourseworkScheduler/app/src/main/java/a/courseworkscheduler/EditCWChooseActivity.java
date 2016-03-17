@@ -8,7 +8,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewCWListActivity extends AppCompatActivity {
+public class EditCWChooseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
