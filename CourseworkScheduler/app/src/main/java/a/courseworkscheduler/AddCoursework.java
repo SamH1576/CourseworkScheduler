@@ -1,6 +1,8 @@
 package a.courseworkscheduler;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,7 +59,8 @@ public class AddCoursework extends AppCompatActivity{
             }
         }
 
-
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK,returnIntent);
         finish(); //exit activity
 
     }

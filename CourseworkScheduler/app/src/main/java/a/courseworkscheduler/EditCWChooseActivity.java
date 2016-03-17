@@ -13,7 +13,7 @@ public class EditCWChooseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_cwlist);
+        setContentView(R.layout.activity_edit_cwchoose);
         ListView lv = (ListView) findViewById(R.id.listView);
 
         // Instanciating an array list (you don't need to do this,
