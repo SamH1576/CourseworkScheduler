@@ -37,6 +37,12 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickClearFile(View view){
+        clearFile();
+        final View coordinatorLayoutView = findViewById(R.id.snackbarPosition);
+        Snackbar.make(coordinatorLayoutView, "All Coursework Cleared", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -46,6 +52,23 @@ public class HomeActivity extends AppCompatActivity {
             Snackbar.make(coordinatorLayoutView, "Coursework Added", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
+        }
+    }
+
+    public void clearFile(){
+        BufferedWriter bufferWriter = null;
+        try {
+            FileOutputStream fileOutputStream = openFileOutput("CWStore", Context.MODE_PRIVATE);
+            bufferWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+            bufferWriter.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally{
+            try{
+                bufferWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

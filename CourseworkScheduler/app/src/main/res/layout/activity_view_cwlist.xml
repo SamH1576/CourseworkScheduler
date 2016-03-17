@@ -10,4 +10,30 @@
     tools:context="a.courseworkscheduler.ViewCWListActivity">
 
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/OrderNameBtn"
+        android:id="@+id/OrderNameBtn"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/OrderDateBtn"
+        android:id="@+id/OrderDateBtn"
+        android:layout_below="@+id/OrderNameBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/OrderWeightBtn"
+        android:id="@+id/OrderWeightingBtn"
+        android:layout_below="@+id/OrderDateBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
