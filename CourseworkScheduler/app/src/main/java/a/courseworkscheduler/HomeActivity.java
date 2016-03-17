@@ -24,7 +24,12 @@ public class HomeActivity extends AppCompatActivity {
 
     public void openAddCW(View view) {
         Intent intent = new Intent(this, AddCoursework.class);
-        startActivityForResult(intent, 0xe110);
+        startActivityForResult(intent, 1);
+    }
+
+    public void onClickEditCW(View view){
+        Intent intent = new Intent(this, EditCWChooseActivity.class);
+        startActivity(intent);
     }
 
     public void onClickViewCW(View view){
@@ -35,10 +40,12 @@ public class HomeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 0xe110) {
-            final View coordinatorLayoutView = findViewById(R.id.snackbarPosition);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK){
+                final View coordinatorLayoutView = findViewById(R.id.snackbarPosition);
             Snackbar.make(coordinatorLayoutView, "Coursework Added", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+        }
         }
     }
 }
