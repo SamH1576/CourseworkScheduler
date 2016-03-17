@@ -27,6 +27,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivityForResult(intent, 0xe110);
     }
 
+    public void onClickViewCW(View view){
+        Intent intent = new Intent(this, ViewCWListActivity.class);
+        startActivity(intent);
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
