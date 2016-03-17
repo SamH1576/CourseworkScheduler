@@ -41,10 +41,10 @@ public class AddCoursework extends AppCompatActivity{
 
         //Add data to file
         //TODO rewrite this as a callable function, so that initially file can be wiped, then MODE_APPEND used to add to it
-        String datatostore = CWName_Text + "," + DueDate_Text + "," + Weighting_Text;
+        String datatostore = CWName_Text + "|" + DueDate_Text + "|" + Weighting_Text+",";
         BufferedWriter bufferWriter = null;
         try {
-            FileOutputStream fileOutputStream = openFileOutput("CWStore", Context.MODE_PRIVATE);
+            FileOutputStream fileOutputStream = openFileOutput("CWStore", Context.MODE_APPEND);
             bufferWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
             bufferWriter.write(datatostore);
         } catch (FileNotFoundException e) {

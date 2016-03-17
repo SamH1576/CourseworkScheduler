@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import static a.courseworkscheduler.stringtoarray.*;
+
 public class EditCWChooseActivity extends AppCompatActivity {
 
     @Override
@@ -25,9 +27,15 @@ public class EditCWChooseActivity extends AppCompatActivity {
         // you already have yours).
         List<String> your_array_list = new ArrayList<String>();
         String data = returnCWData();
-        your_array_list.add(data);
-        your_array_list.add("bar");
-
+        stringtoarray s2a = new stringtoarray(data);
+        s2a.MatrixMaker(data);
+        int arraylength = stringtoarray.finalmatrix.length;
+        for(int i=0; i<arraylength; i++) {
+            String tempdata = (finalmatrix[i][0]);
+            if(tempdata!=null) {
+                your_array_list.add(tempdata);
+            }
+            }
         // This is the array adapter, it takes the context of the activity as a
         // first parameter, the type of list view as a second parameter and your
         // array as a third parameter.
