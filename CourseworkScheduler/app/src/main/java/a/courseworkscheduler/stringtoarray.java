@@ -31,8 +31,6 @@ public class stringtoarray {
             matrix[r++] = row.split("\\|");
             finalmatrix = matrix;
         }
-        //matrix[1][1] row column
-        //stringtoarray s2a = new stringtoarray(inputs);
-        //s2a.MatrixMaker(inputs);
+
     }
 }

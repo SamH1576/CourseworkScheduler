@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,14 +40,19 @@ public class AddCoursework extends AppCompatActivity {
             prepForm(message);
             isUpdate = true;
             oldDataString = prepRemoveOldData(message);
-            Log.d("Log", oldDataString);
+
         }
     }
 
     public void onAddCWClick(View view) {
         EditText CWName = (EditText) findViewById(R.id.CWTitle);
         String CWName_Text = CWName.getText().toString();
-        //TODO check this doesn't have the same name as an existing CW (not necessary)
+        if(returnCWData().contains(CWName_Text)){
+            Toast.makeText(this, "Already a coursework with that name!",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
         EditText DueDate = (EditText) findViewById(R.id.DueDate);
         String DueDate_Text = DueDate.getText().toString();
 
@@ -57,13 +63,11 @@ public class AddCoursework extends AppCompatActivity {
 
 
         //Add data to file
-        if(isUpdate == true) {
+        if (isUpdate == true) {
             String datatostore = oldDataString + CWName_Text + "|" + DueDate_Text + "|" + Weighting_Text + ",";
-            Log.d("Log", datatostore);
             addToFile(datatostore);
-        }else{
+        } else {
             String datatostore = CWName_Text + "|" + DueDate_Text + "|" + Weighting_Text + ",";
-            Log.d("Log", "ELSE"+datatostore);
             addToFile(datatostore);
         }
 
@@ -96,9 +100,9 @@ public class AddCoursework extends AppCompatActivity {
     public void addToFile(String data) {
         BufferedWriter bufferWriter = null;
         try {
-            if(isUpdate==true) {
+            if (isUpdate == true) {
                 context = Context.MODE_PRIVATE;
-            }else{
+            } else {
                 context = Context.MODE_APPEND;
             }
             FileOutputStream fileOutputStream = openFileOutput("CWStore", context);
@@ -118,12 +122,12 @@ public class AddCoursework extends AppCompatActivity {
     public String prepRemoveOldData(String message) {
         int j = 150; //Large number so that if something goes wrong, no string data is lost by accident
         String OC = returnCWData();
-        String substrtoDel =null;
+        String substrtoDel = null;
         int arraylength = stringtoarray.finalmatrix.length;
         for (int i = 0; i < arraylength; i++) {
             String tempdata = (stringtoarray.finalmatrix[i][0]);
             if (Objects.equals(tempdata, message)) {
-                j=i;
+                j = i;
             }
         }
 

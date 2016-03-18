@@ -17,7 +17,8 @@
         android:id="@+id/OrderNameBtn"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="onClickOrderName" />
 
     <Button
         android:layout_width="wrap_content"
@@ -26,7 +27,8 @@
         android:id="@+id/OrderDateBtn"
         android:layout_below="@+id/OrderNameBtn"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="onClickOrderDate" />
 
     <Button
         android:layout_width="wrap_content"
@@ -35,5 +37,6 @@
         android:id="@+id/OrderWeightingBtn"
         android:layout_below="@+id/OrderDateBtn"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="onClickOrderWeight" />
 </RelativeLayout>

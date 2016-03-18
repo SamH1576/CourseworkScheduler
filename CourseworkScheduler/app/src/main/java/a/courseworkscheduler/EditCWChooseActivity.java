@@ -1,13 +1,16 @@
 package a.courseworkscheduler;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -21,8 +24,6 @@ import static a.courseworkscheduler.stringtoarray.*;
 
 public class EditCWChooseActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "a.courseworkscheduler.MESSAGE";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +55,18 @@ public class EditCWChooseActivity extends AppCompatActivity {
                 this,
                 android.R.layout.simple_list_item_1,
                 your_array_list);
-        //TODO Add Snackbar saying nothing to display if no CWs
+
         lv.setAdapter(arrayAdapter);
+        Log.d("Log", "Complete");
+
+        if(!arrayAdapter.getItem(0).isEmpty()){
+            Log.d("Log", "Nothing to show");
+
+            return;
+        }
+        Toast.makeText(this, "Nothing to show!",
+                Toast.LENGTH_LONG).show();
+
     }
 
     public String returnCWData() {
@@ -81,11 +92,22 @@ public class EditCWChooseActivity extends AppCompatActivity {
         }
 
         return String.valueOf(result);
-    }
+    } //Added to each class as cannot be static due to openFileStream
     public void sendtoAddCW(String message){
         Intent intent = new Intent(this, AddCoursework.class);
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
         finish();
     }
+    public static Boolean ContainsAllNulls(ArrayList arrList) {
+        if(arrList != null)
+        {
+            for(Object a : arrList)
+                if(a != null) return false;
+        }
+
+        return true;
+    }
+
+
 }
