@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-//TODO write a method to clear the text file whilst debugging
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override

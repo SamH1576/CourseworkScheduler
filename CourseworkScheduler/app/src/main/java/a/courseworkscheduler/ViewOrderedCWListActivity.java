@@ -1,5 +1,6 @@
 package a.courseworkscheduler;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,14 +24,22 @@ public class ViewOrderedCWListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_ordered_cwlist);
-
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(EditCWChooseActivity.EXTRA_MESSAGE);
 
         ListView lv = (ListView) findViewById(R.id.listView);
         List<String> your_array_list = new ArrayList<String>();
         String data = returnCWData();
         stringtoarray s2a = new stringtoarray(data);
         s2a.MatrixMaker(data);
-        //TODO add matrix ordering method here!//////////////////////////////
+        switch(message){
+            case "Name": s2a.MatrixSorterbyName();
+                break;
+            case "Date": s2a.MatrixSorterbyDate();
+                break;
+            case "Weight": s2a.MatrixSorterbyWeight();
+                break;
+            }
         int arraylength = stringtoarray.finalmatrix.length;
         for (int i = 0; i < arraylength; i++) {
             String tempdata = (finalmatrix[i][0]);

@@ -48,9 +48,11 @@ public class AddCoursework extends AppCompatActivity {
         EditText CWName = (EditText) findViewById(R.id.CWTitle);
         String CWName_Text = CWName.getText().toString();
         if(returnCWData().contains(CWName_Text)){
-            Toast.makeText(this, "Already a coursework with that name!",
-                    Toast.LENGTH_LONG).show();
-            return; //Exit Method without adding data
+            if(!isUpdate) {
+                Toast.makeText(this, "Already a coursework with that name!",
+                        Toast.LENGTH_LONG).show();
+                return; //Exit Method without adding data
+            }
         }
 
         EditText DueDate = (EditText) findViewById(R.id.DueDate);

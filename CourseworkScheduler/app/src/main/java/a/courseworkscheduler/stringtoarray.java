@@ -2,6 +2,7 @@ package a.courseworkscheduler;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 
 /**
  * @author Huan Min Gan
@@ -33,18 +34,16 @@ public class stringtoarray {
 
     }
 
-    public String[][] MatrixSorterbyName() {
+    public void MatrixSorterbyName() {
         Arrays.sort(finalmatrix, new Comparator<String[]>() {
             @Override
             public int compare(final String[] entry1, final String[] entry2) {
                 return entry1[0].compareTo(entry2[0]);
             }
         });
-
-        return finalmatrix;
     }
 
-    public String[][] MatrixSorterbyDate() {
+    public void MatrixSorterbyDate() {
         Arrays.sort(finalmatrix, new Comparator<String[]>() {
             @Override
             public int compare(String[] entry1, String[] entry2) {
@@ -52,10 +51,9 @@ public class stringtoarray {
             }
         });
 
-        return finalmatrix;
     }
-
-    public String[][] MatrixSorterbyWeight() {
+    //TODO INVERT THIS to make it descending
+    public void MatrixSorterbyWeight() {
         Arrays.sort(finalmatrix, new Comparator<String[]>() {
             @Override
             public int compare(final String[] entry1, final String[] entry2) {
@@ -63,7 +61,6 @@ public class stringtoarray {
 
             }
         });
-        return finalmatrix;
     }
 }
 
