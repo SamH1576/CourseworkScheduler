@@ -50,7 +50,7 @@ public class AddCoursework extends AppCompatActivity {
         if(returnCWData().contains(CWName_Text)){
             Toast.makeText(this, "Already a coursework with that name!",
                     Toast.LENGTH_LONG).show();
-            return;
+            return; //Exit Method without adding data
         }
 
         EditText DueDate = (EditText) findViewById(R.id.DueDate);
@@ -63,7 +63,7 @@ public class AddCoursework extends AppCompatActivity {
 
 
         //Add data to file
-        if (isUpdate == true) {
+        if (isUpdate) {
             String datatostore = oldDataString + CWName_Text + "|" + DueDate_Text + "|" + Weighting_Text + ",";
             addToFile(datatostore);
         } else {
@@ -74,7 +74,7 @@ public class AddCoursework extends AppCompatActivity {
 
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_OK, returnIntent);
-        isUpdate = false;
+        isUpdate = false; //reset isUpate
         finish(); //exit activity
 
     }
