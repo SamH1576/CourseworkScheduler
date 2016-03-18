@@ -27,6 +27,7 @@ import java.util.Objects;
  */
 public class AddCoursework extends AppCompatActivity {
     public String oldDataString;
+    public String origCWName;
     public boolean isUpdate = false;
     public int context = 0;
 
@@ -40,7 +41,6 @@ public class AddCoursework extends AppCompatActivity {
             prepForm(message);
             isUpdate = true;
             oldDataString = prepRemoveOldData(message);
-
         }
     }
 
@@ -48,7 +48,7 @@ public class AddCoursework extends AppCompatActivity {
         EditText CWName = (EditText) findViewById(R.id.CWTitle);
         String CWName_Text = CWName.getText().toString();
         if(returnCWData().contains(CWName_Text)){
-            if(!isUpdate) {
+            if(!isUpdate) { //TODO check to see whether CW name stays the same as initial version - if yes no problem, if no check against database
                 Toast.makeText(this, "Already a coursework with that name!",
                         Toast.LENGTH_LONG).show();
                 return; //Exit Method without adding data
@@ -56,6 +56,7 @@ public class AddCoursework extends AppCompatActivity {
         }
 
         EditText DueDate = (EditText) findViewById(R.id.DueDate);
+
         String DueDate_Text = DueDate.getText().toString();
 
         EditText Weighting = (EditText) findViewById(R.id.Weighting);
@@ -132,7 +133,6 @@ public class AddCoursework extends AppCompatActivity {
                 j = i;
             }
         }
-
         substrtoDel = (stringtoarray.finalmatrix[j][0]) + "|" + (stringtoarray.finalmatrix[j][1]) + "|" + (stringtoarray.finalmatrix[j][2]) + ",";
 
         return OC.replace(substrtoDel, "");
