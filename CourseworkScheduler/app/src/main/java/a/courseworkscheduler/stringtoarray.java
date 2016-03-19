@@ -35,9 +35,8 @@ public class stringtoarray {
         int r = 0;
         for (String row : rows) {
             matrix[r++] = row.split("\\|");
-            finalmatrix = matrix;
         }
-
+        finalmatrix = matrix;
     }
 
     public void MatrixSorterbyName() {
