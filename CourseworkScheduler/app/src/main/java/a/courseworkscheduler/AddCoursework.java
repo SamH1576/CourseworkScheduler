@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Objects;
 
-public class AddCoursework extends AppCompatActivity {
+public class AddCoursework extends AppCompatActivity { //code for the AddCoursework activity
     public String oldDataString; //Initialise class wide variables
     public String origCWName = null;
     public boolean isUpdate = false;
@@ -114,10 +114,10 @@ public class AddCoursework extends AppCompatActivity {
 
     public void prepForm(String message) { //method to prepare the form is coursework is being edited
         int arraylength = stringtoarray.finalmatrix.length; //find the finalmatrix length
-        for (int i = 0; i < arraylength; i++) { //
-            String tempdata = (stringtoarray.finalmatrix[i][0]);
-            if (tempdata != null) {
-                if (Objects.equals(tempdata, message)) {
+        for (int i = 0; i < arraylength; i++) { //Loop over array length to grab the data from each row of the matrix
+            String tempdata = (stringtoarray.finalmatrix[i][0]); //first check there is infact data in that row
+            if (tempdata != null) { //if there isn't anything in the row, don't bother
+                if (Objects.equals(tempdata, message)) { //if the first element in the row (CWtitle) matches the CW being edited, fill the form with the data from this row
                     EditText CWTitle = (EditText) findViewById(R.id.CWTitle);
                     EditText DueDate = (EditText) findViewById(R.id.DueDate);
                     EditText Weighting = (EditText) findViewById(R.id.Weighting);
@@ -130,110 +130,109 @@ public class AddCoursework extends AppCompatActivity {
 
     }
 
-    public void addToFile(String data) {
-        BufferedWriter bufferWriter = null;
-        try {
+    public void addToFile(String data) { //add the passed string to the storage file
+        BufferedWriter bufferWriter = null; //initialise a new BufferWriter, which actually handles the file input
+        try { //the try catch structure is used to catch any errors when opening and writing the file, which would otherwise cause the app to close
             if (isUpdate) {
-                context = Context.MODE_PRIVATE;
+                context = Context.MODE_PRIVATE; //Private mode clears the entire file and adds the new string in its place
             } else {
-                context = Context.MODE_APPEND;
+                context = Context.MODE_APPEND; //Append mode adds the new string to the end of the file
             }
-            FileOutputStream fileOutputStream = openFileOutput("CWStore", context);
-            bufferWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
-            bufferWriter.write(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+            FileOutputStream fileOutputStream = openFileOutput("CWStore", context); //Initialise an output reader and target file with the write type specified above, required for the buffer writer
+            bufferWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream)); //Point the file writer at the target file
+            bufferWriter.write(data); //write the data to the file
+        } catch (IOException e) { //handle any errors
+            e.printStackTrace(); //print the error to logcat
+        } finally { //after the try, catch structure, the file is closed using another try catch to handle errors if closing
             try {
-                assert bufferWriter != null;
-                bufferWriter.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                assert bufferWriter != null; //checking that the bufferWriter isn't null, ie no errors above
+                bufferWriter.close(); //close the file
+            } catch (IOException e) { //handle any errors
+                e.printStackTrace(); //print error to logcat
             }
         }
     }
 
-    public String prepRemoveOldData(String message) {
+    public String prepRemoveOldData(String message) { //method to return a string of the stored data, without the piece of coursework which is being edited
         int j = 150; //Large number so that if something goes wrong, no string data is lost by accident
-        String OC = returnCWData();
-        String substrtoDel;
-        int arraylength = stringtoarray.finalmatrix.length;
-        for (int i = 0; i < arraylength; i++) {
-            String tempdata = (stringtoarray.finalmatrix[i][0]);
-            if (Objects.equals(tempdata, message)) {
-                j = i;
+        String OC = returnCWData(); //fetch the file data
+        int arraylength = stringtoarray.finalmatrix.length; //fetch the length of the matrix (no of rows)
+        for (int i = 0; i < arraylength; i++) { //for each row of the matrix ...
+            String tempdata = (stringtoarray.finalmatrix[i][0]); //check the first element ...
+            if (Objects.equals(tempdata, message)) { //if the first element (CWName) is the same as the coursework being edited (message) ...
+                j = i; //record the row number for use below
             }
         }
-        substrtoDel = (stringtoarray.finalmatrix[j][0]) + "|" + (stringtoarray.finalmatrix[j][1]) + "|" + (stringtoarray.finalmatrix[j][2]) + ",";
-        return OC.replace(substrtoDel, "");
+        String substrtoDel = (stringtoarray.finalmatrix[j][0]) + "|" + (stringtoarray.finalmatrix[j][1]) + "|" + (stringtoarray.finalmatrix[j][2]) + ","; //prepares a string of the data for the coursework being edited...
+        return OC.replace(substrtoDel, ""); //replaces that string with nothing (ie deletes it), and returns this final string
     }
 
-    public String returnCWData() {
-        BufferedReader bufferReader = null;
-        StringBuilder result = new StringBuilder();
-        try {
-            FileInputStream fileInputStream = openFileInput("CWStore");
-            bufferReader = new BufferedReader(new InputStreamReader(fileInputStream));
+    public String returnCWData() { //Returns a string of the data which is currently stored
+        BufferedReader bufferReader = null; //Initialise a buffer reader, which will read the file
+        StringBuilder result = new StringBuilder(); //Initialise a stringbuilder, which puts together strings
+        try { //try, catch structure used to handle errors
+            FileInputStream fileInputStream = openFileInput("CWStore"); //Initialise an input stream and target file, required for the reader below
+            bufferReader = new BufferedReader(new InputStreamReader(fileInputStream)); //Point the reader at the target file
             String line;
-            while ((line = bufferReader.readLine()) != null) {
-                result.append(line);
+            while ((line = bufferReader.readLine()) != null) { //Whilst there are sill lines to be read...
+                result.append(line); //add that line to the string
             }
-        } catch (IOException e) {
+        } catch (IOException e) { //error handling
             e.printStackTrace();
-        } finally {
+        } finally { //assuming there are no errors in the try catch above...
             try {
-                assert bufferReader != null;
-                bufferReader.close();
+                assert bufferReader != null; //checking the file isn't null, ie not opened
+                bufferReader.close(); //close the file
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return String.valueOf(result);
+        return String.valueOf(result); //return the file data as a string
     }
 
-    public String VerifyInputs(String elementToCheck, String input){
-        String notification = null;
+    public String VerifyInputs(String elementToCheck, String input){ //Method to verify inputs of each field on the AddCW activity
+        String notification = null; //declare a String variable and initialise it
         switch(elementToCheck){
-            case "CWName":
-                if(Objects.equals(input, "")){
+            case "CWName": //handles the CWName field
+                if(Objects.equals(input, "")){ //no title given
                     notification = "Please enter a coursework title!";
-                }else if(input.length()>50){
+                }else if(input.length()>50){ //title is too long
                     notification = "Coursework title is too long!";
                 }
                 break;
-            case "DueDate":
-                if(!isValidDate(input)  || input.length()!= 8) {
+            case "DueDate": //handles the DueDate field
+                if(!isValidDate(input)  || input.length()!= 8) { //ensures the date is valid and in the correct format
                     notification = "Date is invalid (DD/MM/YY)";
                 }
                 break;
-            case "Weighting":
-                if(!isNumeric(input)){
+            case "Weighting": //handles the weighting field
+                if(!isNumeric(input)){ //checks that the input is actually numeric
                     notification = "Weighting must be a number!";
-                }else if(Double.valueOf(input)>100 || Double.valueOf(input)<0){
+                }else if(Double.valueOf(input)>100 || Double.valueOf(input)<0){ //input must be between 0 and 100
                     notification = "Weighting must be between 0 and 100!";
                 }
                 break;
         }
 
-        return notification;
+        return notification; //returns the appropriate notification declared in the switch structure if there is a problem with the input, null if no problems
     }
 
-    public boolean isValidDate(String dateString) {
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy", Locale.ENGLISH);
+    public boolean isValidDate(String dateString) { //Method which checks a string to confirm it is a valid date
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy", Locale.ENGLISH); //Initialises a date formater and tells it to check dates of the form dd/MM/yy
         try {
-            df.setLenient(false);
-            df.parse(dateString);
+            df.setLenient(false); //Checks that the date is not only in the correct form, but a possible date as well ie not 99/99/99
+            df.parse(dateString); //parses the string which was sent to the method, if there is no error it simply returns true
             return true;
-        } catch (ParseException e) {
+        } catch (ParseException e) { //if an error is raised in the try brace then the string is not a valid date, so false is returned
             return false;
         }
     }
-    public static boolean isNumeric(String str){
+    public static boolean isNumeric(String str){ //Checks that a string contains a number
         try{
-            Double.parseDouble(str);
-        }catch(NumberFormatException nfe){
+            Double.parseDouble(str); //parses the string to a double format
+        }catch(NumberFormatException nfe){ //if an error is raised in the try brace, the string was non-numeric, so the method returns false
             return false;
         }
-        return true;
+        return true; //no errors means the string is a number, so true is returned
     }
 }

@@ -21,19 +21,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static a.courseworkscheduler.stringtoarray.*;
-//TODO implement a long press -> delete option
-public class EditCWChooseActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "a.courseworkscheduler.MESSAGE";
+public class EditCWChooseActivity extends AppCompatActivity { //Code for the EditCWChoose activity
+    public final static String EXTRA_MESSAGE = "a.courseworkscheduler.MESSAGE"; //initialise a string variable which is used to send messages with intents to other activies
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { //method executed on the activity being created
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_cwchoose);
-        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+        setContentView(R.layout.activity_edit_cwchoose); //sets the activity layout to be the Edit_CWchoose xml
+        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() { //handles an item in the array list being clicked
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { //when an item is clickd...
                 TextView item =(TextView) view;
                 String message = item.getText().toString();
-                sendtoAddCW(message);
+                sendtoAddCW(message); //...TODO cont
             }
         };
         ListView lv = (ListView) findViewById(R.id.listView);
@@ -41,7 +40,7 @@ public class EditCWChooseActivity extends AppCompatActivity {
 
         List<String> your_array_list = new ArrayList<String>();
         String data = returnCWData();
-        stringtoarray s2a = new stringtoarray(data);
+        stringtoarray s2a = new stringtoarray();
         s2a.MatrixMaker(data);
         int arraylength = stringtoarray.finalmatrix.length;
         for (int i = 0; i < arraylength; i++) {

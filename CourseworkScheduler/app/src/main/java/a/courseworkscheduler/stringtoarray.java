@@ -14,6 +14,7 @@ import java.util.logging.Logger;
  * @author Huan Min Gan
  */
 public class stringtoarray {
+<<<<<<< HEAD
     public static String[][] finalmatrix;//Initialise a public string of 2 dimensions named
 
     public void MatrixMaker(String inputs) {//Method to create a 2 dimensional matrix of 3xn size from a string of inputs
@@ -24,6 +25,19 @@ public class stringtoarray {
             matrix[r++] = row.split("\\|");
             finalmatrix = matrix; //Equates the public 2 dimensional array finalmatrix = matrix. finalmatrix data is used in subsequent parts of the code
         }
+=======
+    public static String[][] finalmatrix;
+
+    public void MatrixMaker(String inputs) {
+        String[] rows = inputs.split(",");
+
+        String[][] matrix = new String[rows.length][];
+        int r = 0;
+        for (String row : rows) {
+            matrix[r++] = row.split("\\|");
+        }
+        finalmatrix = matrix;
+>>>>>>> master
     }
 
     public void MatrixSorterbyName() {//Method to sort finalmatrix according to column[0] i.e the first column. Since it is a strings, it will sort it alphabetically
