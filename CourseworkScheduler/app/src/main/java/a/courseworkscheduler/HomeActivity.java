@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -51,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
                 final View coordinatorLayoutView = findViewById(R.id.snackbarPosition);
             Snackbar.make(coordinatorLayoutView, "Coursework Added", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-        }
+            }
         }
     }
 

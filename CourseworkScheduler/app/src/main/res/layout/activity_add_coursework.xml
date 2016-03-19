@@ -87,4 +87,15 @@
         android:layout_alignRight="@+id/Weighting"
         android:layout_alignEnd="@+id/Weighting"
         android:onClick="onAddCWClick" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DeleteCWBtn"
+        android:id="@+id/DelCWBtn"
+        android:layout_alignTop="@+id/AddCWBtn"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"
+        android:onClick="onDelCWClick" />
 </RelativeLayout>

@@ -15,5 +15,6 @@
     <string name="OrderNameBtn">Order Coursework By Name</string>
     <string name="OrderDateBtn">Order Coursework By Date</string>
     <string name="OrderWeightBtn">Order Coursework By Weighting</string>
+    <string name="DeleteCWBtn">Delete Coursework</string>
 
 </resources>

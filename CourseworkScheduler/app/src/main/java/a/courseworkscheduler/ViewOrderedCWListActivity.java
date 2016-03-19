@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static a.courseworkscheduler.stringtoarray.finalmatrix;
 
@@ -28,52 +29,46 @@ public class ViewOrderedCWListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_ordered_cwlist);
         Intent intent = getIntent();
         String message = intent.getStringExtra(EditCWChooseActivity.EXTRA_MESSAGE);
-        int extrainfo = 0;
 
         ListView lv = (ListView) findViewById(R.id.listView);
         List<String> your_array_list = new ArrayList<String>();
         String data = returnCWData();
         stringtoarray s2a = new stringtoarray(data);
         s2a.MatrixMaker(data);
-        switch (message) {
-            case "Name":
-                s2a.MatrixSorterbyName();
-                break;
-            case "Date":
-                s2a.MatrixSorterbyDate();
-                extrainfo = 1;
-                break;
-            case "Weight":
-                s2a.MatrixSorterbyWeight();
-                extrainfo = 2;
-                break;
-        }
-        int arraylength = stringtoarray.finalmatrix.length;
-        for (int i = 0; i < arraylength; i++) {
-            String tempdata = (finalmatrix[i][0]);
-            String tempdata2 = (finalmatrix[i][extrainfo]); //add the data / weighting to the CW info
-            if (tempdata != null) {
-                if (extrainfo != 0) {
-                    your_array_list.add(tempdata + " " + tempdata2);
-                } else {
-                    your_array_list.add(tempdata);
-                }
+        if (finalmatrix[0][0] != null) {
+            switch (message) {
+                case "Name":
+                    s2a.MatrixSorterbyName();
+                    break;
+                case "Date":
+                    s2a.MatrixSorterbyDate();
+                    break;
+                case "Weight":
+                    s2a.MatrixSorterbyWeight();
+                    break;
             }
         }
+        int arraylength = stringtoarray.finalmatrix.length;
+        if (!finalmatrix[0][0].isEmpty()) {
+            for (int i = 0; i < arraylength; i++) {
+                String tempdata = (finalmatrix[i][0]);
+                String tempdata2 = (finalmatrix[i][1]);
+                String tempdata3 = (finalmatrix[i][2]);//add the data / weighting to the CW info (only fetched if needed)
+                your_array_list.add(tempdata + "  " + tempdata2 + "  " + tempdata3);
+                }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        } else {
+            Toast.makeText(this, "Nothing to show!", //If the code reaches this point the array must be empty - so display Toast
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 your_array_list);
 
         lv.setAdapter(arrayAdapter);
-        if (!arrayAdapter.getItem(0).isEmpty()) { //If the first item is empty the whole array is empty - if this isn't the case, exit the method
-            Log.d("Log", "Nothing to show");
-
-            return;
-        }
-        Toast.makeText(this, "Nothing to show!", //If the code reaches this point the array must be empty - so display Toast
-                Toast.LENGTH_LONG).show();
     }
 
 
