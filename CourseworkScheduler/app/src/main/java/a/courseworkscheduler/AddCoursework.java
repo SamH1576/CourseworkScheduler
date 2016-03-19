@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Objects;
 
-public class AddCoursework extends AppCompatActivity {
+public class AddCoursework extends AppCompatActivity { //code for the AddCoursework activity
     public String oldDataString; //Initialise class wide variables
     public String origCWName = null;
     public boolean isUpdate = false;

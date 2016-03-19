@@ -33,7 +33,7 @@ public class ViewOrderedCWListActivity extends AppCompatActivity {
         ListView lv = (ListView) findViewById(R.id.listView);
         List<String> your_array_list = new ArrayList<String>();
         String data = returnCWData();
-        stringtoarray s2a = new stringtoarray(data);
+        stringtoarray s2a = new stringtoarray();
         s2a.MatrixMaker(data);
         if (finalmatrix[0][0] != null) {
             switch (message) {

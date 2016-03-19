@@ -14,19 +14,7 @@ import java.util.logging.Logger;
  * @author Huan Min Gan
  */
 public class stringtoarray {
-    private String add_coursework_inputs;
     public static String[][] finalmatrix;
-
-    public stringtoarray(String rawinputs) {
-        add_coursework_inputs = rawinputs;
-    }
-
-//    public void arraymaker() {
-//        String[] array = add_coursework_inputs.split(",");
-//        for (int i = 0; i < array.length; i++) {
-//            System.out.println(array[i]);
-//        }
-//    }
 
     public void MatrixMaker(String inputs) {
         String[] rows = inputs.split(",");
