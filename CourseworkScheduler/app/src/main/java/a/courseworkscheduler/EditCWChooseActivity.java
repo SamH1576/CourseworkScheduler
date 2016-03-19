@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static a.courseworkscheduler.stringtoarray.*;
-
+//TODO implement a long press -> delete option
 public class EditCWChooseActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "a.courseworkscheduler.MESSAGE";
     @Override
