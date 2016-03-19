@@ -40,6 +40,8 @@ public class AddCoursework extends AppCompatActivity {
             isUpdate = true; //set class wide variable isUpate to be true, used later on
             Button DeleteButton = (Button)findViewById(R.id.DelCWBtn); //find and reference the DelCWBtn
             DeleteButton.setVisibility(View.VISIBLE); //make the DelCWBtn visible
+            Button AddButton = (Button)findViewById(R.id.AddCWBtn);
+            AddButton.setText("Update");
             oldDataString = prepRemoveOldData(message); //call the prepRemoveOldData method, which returns a string of all data minus the data for the coursework which is being edited
         }
     }
@@ -49,7 +51,7 @@ public class AddCoursework extends AppCompatActivity {
         EditText CWName = (EditText) findViewById(R.id.CWTitle); //identify the CWName field
         String CWName_Text = CWName.getText().toString(); //get the text from the CWName field
         if (!Objects.equals(origCWName, CWName_Text)) { //Identifies whether this is an update or not, as OrigCWName will be null unless initialised when intent is received
-            if (returnCWData().contains(CWName_Text)) { //if the file already contains a piece of CW with the same name...
+            if (returnCWData().contains(CWName_Text + "|")) { //if the file already contains a piece of CW with the same name...
                 Toast.makeText(this, "Already a coursework with that name!", //display a notification
                         Toast.LENGTH_LONG).show();
                 return; //Exit Method without adding data to file
@@ -93,6 +95,10 @@ public class AddCoursework extends AppCompatActivity {
 
         Intent returnIntent = new Intent(); //initialise the intent to return
         setResult(Activity.RESULT_OK, returnIntent); //set the result to return
+        if(isUpdate){
+            Toast.makeText(this, "Coursework Updated!", //display a notification
+                    Toast.LENGTH_LONG).show();
+        }
         isUpdate = false; //reset isUpate //set isUpdate false for safety
         finish(); //exit activity
 
