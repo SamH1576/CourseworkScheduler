@@ -79,12 +79,11 @@ public class EditCWChooseActivity extends AppCompatActivity {
             while ((line = bufferReader.readLine()) != null) {
                 result.append(line);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
+                assert bufferReader != null;
                 bufferReader.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -98,15 +97,6 @@ public class EditCWChooseActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
         finish();
-    }
-    public static Boolean ContainsAllNulls(ArrayList arrList) {
-        if(arrList != null)
-        {
-            for(Object a : arrList)
-                if(a != null) return false;
-        }
-
-        return true;
     }
 
 
