@@ -167,7 +167,7 @@ public class AddCoursework extends AppCompatActivity { //code for the AddCoursew
         return OC.replace(substrtoDel, ""); //replaces that string with nothing (ie deletes it), and returns this final string
     }
 
-    public String returnCWData() { //Returns a string of the data which is currently stored
+    public String returnCWData() { //Returns a string of the data which is currently stored NB Added to each class as cannot be static due to openFileStream
         BufferedReader bufferReader = null; //Initialise a buffer reader, which will read the file
         StringBuilder result = new StringBuilder(); //Initialise a stringbuilder, which puts together strings
         try { //try, catch structure used to handle errors
