@@ -50,11 +50,13 @@ public class AddCoursework extends AppCompatActivity { //code for the AddCoursew
         String verifymessage; //initialise verifymessage variable
         EditText CWName = (EditText) findViewById(R.id.CWTitle); //identify the CWName field
         String CWName_Text = CWName.getText().toString(); //get the text from the CWName field
-        if (!Objects.equals(origCWName, CWName_Text)) { //Identifies whether this is an update or not, as OrigCWName will be null unless initialised when intent is received
-            if (returnCWData().contains(CWName_Text + "|")) { //if the file already contains a piece of CW with the same name...
-                Toast.makeText(this, "Already a coursework with that name!", //display a notification
-                        Toast.LENGTH_LONG).show();
-                return; //Exit Method without adding data to file
+        if(!Objects.equals(CWName_Text, "")) { //If the CWName field is empty, don't check whether there is an existing item with the same name - blank field handled later on
+            if (!Objects.equals(origCWName, CWName_Text)) { //Identifies whether this is an update or not, as OrigCWName will be null unless initialised when intent is received
+                if (returnCWData().contains(CWName_Text + "|")) { //if the file already contains a piece of CW with the same name...
+                    Toast.makeText(this, "Already a coursework with that name!", //display a notification
+                            Toast.LENGTH_LONG).show();
+                    return; //Exit Method without adding data to file
+                }
             }
         }
         verifymessage = VerifyInputs("CWName", CWName_Text); //calls the VerifyInputs method and sends the CWName tag and the text from the CWName field
